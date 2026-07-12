@@ -1,0 +1,15 @@
+{
+	"name": "DF-SpotifyProjectbubun",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a02c9224-1029-42f0-8db5-2fac8fe7f46c",
+		"tenantId": "5acbbed9-f8a1-49cc-8990-83fea23e3f88"
+	}
+}
