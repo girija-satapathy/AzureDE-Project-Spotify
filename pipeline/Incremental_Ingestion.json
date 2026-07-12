@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}\nWHERE @{pipeline().parameters.cdc_col} > @{activity('Last_cdc').output.value[0].cdc}",
+							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}  WHERE @{pipeline().parameters.cdc_col} >' @{if(empty(pipeline().parameters.from_date),activity('Last_cdc').output.value[0].cdc ,pipeline().parameters.from_date)}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -67,7 +67,10 @@
 						"referenceName": "SinkParquet",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "Users",
+							"folder": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
 							"file": {
 								"value": "@concat(pipeline().parameters.table,'_',variables('current'))",
 								"type": "Expression"
@@ -301,6 +304,9 @@
 				"type": "string"
 			},
 			"cdc_col": {
+				"type": "string"
+			},
+			"from_date": {
 				"type": "string"
 			}
 		},
