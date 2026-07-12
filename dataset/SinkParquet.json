@@ -11,6 +11,9 @@
 			},
 			"file": {
 				"type": "string"
+			},
+			"container": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
